@@ -15,9 +15,13 @@
                         <div class="content article-body">
                            {{blogpost.body}}
                         </div>
+                        {{#if user}}
                         <div class="mt-5 has-text-centered">
                             <a href="/posts/edit/{{blogpost._id}}" class="button is-danger is-outlined is-small">Edit</a>
                         </div>
+                        {{else}}
+
+                        {{/if}}
                     </div>
                 </div>
                 <!-- END ARTICLE -->

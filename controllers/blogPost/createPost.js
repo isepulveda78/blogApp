@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = (req, res) => {
     let errors = [];
-
+    let user = req.session.userId
     if(!req.body.title){
         errors.push({ text: 'Please add a title '})
     }
@@ -20,9 +20,11 @@ module.exports = (req, res) => {
     }else{
         if(req.body.image){
         let image = req.files.image
+      
         image.mv(path.resolve(__dirname, '..', 'public/img', image.name), async(error) => {
             await BlogPost.create({
                 ...req.body,
+                user: user,
                 image: '/img/' + image.name
             })
             req.flash('success_msg', 'Your post has been added')
@@ -31,7 +33,8 @@ module.exports = (req, res) => {
         }else{
           const postBody = {
               title: req.body.title,
-              body: req.body.body
+              body: req.body.body,
+              user: user
           }
           new BlogPost(postBody)
           .save()

@@ -7,15 +7,16 @@ module.exports = (req, res) => {
         if (user) {
             bcrypt.compare(password, user.password, (error, same) => {
                 if (same) { // if passwords match
-                    console.log(user);
-                    req.session.userId = user._id;
-                    res.redirect('/');
+                    console.log(user)
+                    req.session.userId = user._id
+                    res.redirect('/')
+                    req.flash('success_msg', "You're logged in.")
                 } else {
-                    res.redirect('/auth/login');
+                    res.redirect('/login')
                 }
-            });
+            })
         } else {
-            res.redirect('/auth/login');
+            res.redirect('/login')
         }
-    });
-};
+    })
+}

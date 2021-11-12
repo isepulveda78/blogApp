@@ -6,6 +6,7 @@ module.exports = (req, res) => {
     }).lean()
     .then(post => {
         res.render('posts/edit', {
+            title: 'Editing ' + post.title,
             blogpost: post
         })
     })

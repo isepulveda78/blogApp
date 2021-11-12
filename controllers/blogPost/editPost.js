@@ -1,10 +1,14 @@
 const BlogPost = require('../../models/Post')
 
 module.exports = (req, res) => {
+
     BlogPost.findOne({
         _id: req.params.id
     })
     .then(post => {
+        let user = req.session.userId
+        let postUser = post.user 
+        if(user === postUser){
         post.title = req.body.title
         post.body = req.body.body
 
@@ -17,5 +21,9 @@ module.exports = (req, res) => {
             req.flash('success_msg', 'Post has been updated')
             res.redirect('/')
         })
+        }else{
+        req.flash('error_msg', 'Not authorized')
+        res.redirect('/')
+        }
     })
 }

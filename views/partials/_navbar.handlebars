@@ -16,15 +16,21 @@
                     <a class="navbar-item is-active">
                             About
                     </a>
+                    {{#if user}}
                     <a href="/posts/new" class="navbar-item">
                             Write a Blog
                     </a>
+                    <a href="/logout" class="navbar-item">
+                          Logout
+                    </a>
+                    {{else}}
                     <a href="/login" class="navbar-item">
                           Login
                     </a>
                     <a href="/register" class="navbar-item">
                           Register
                     </a>
+                    {{/if}}
                 </div>
             </div>
         </div>
